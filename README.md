@@ -1,25 +1,28 @@
-[![GoDoc](http://godoc.org/github.com/robfig/cron?status.png)](http://godoc.org/github.com/robfig/cron)
-[![Build Status](https://travis-ci.org/robfig/cron.svg?branch=master)](https://travis-ci.org/robfig/cron)
+[![Go Reference](https://pkg.go.dev/badge/github.com/nanostack-dev/cron.svg)](https://pkg.go.dev/github.com/nanostack-dev/cron)
 
 # cron
 
-Cron V3 has been released!
+A maintained fork of [`robfig/cron`](https://github.com/robfig/cron) (MIT) — the original
+has had no tagged release since v3.0.1 (2019). This fork keeps the same well-tested cron
+parsing and scheduling semantics while modernizing the codebase:
 
-To download the specific tagged release, run:
+- Module path `github.com/nanostack-dev/cron`, `go 1.23`.
+- `any` over `interface{}`, `io.Discard` over `io/ioutil`, `slices.SortFunc` for entry ordering.
+- The crontab spec itself is unchanged (it is POSIX and decades-stable): standard 5-field
+  expressions, optional seconds, descriptors (`@hourly` … `@yearly`), and `@every <duration>`.
+
+Install:
 ```bash
-go get github.com/robfig/cron/v3@v3.0.0
+go get github.com/nanostack-dev/cron@latest
 ```
 Import it in your program as:
 ```go
-import "github.com/robfig/cron/v3"
+import "github.com/nanostack-dev/cron"
 ```
-It requires Go 1.11 or later due to usage of Go Modules.
+It requires Go 1.23 or later.
 
-Refer to the documentation here:
-http://godoc.org/github.com/robfig/cron
-
-The rest of this document describes the the advances in v3 and a list of
-breaking changes for users that wish to upgrade from an earlier version.
+The rest of this document describes the API and a list of breaking changes for users that
+upgrade from an earlier version of the upstream library.
 
 ## Upgrading to v3 (June 2019)
 
@@ -33,7 +36,7 @@ the timezone support, and fixes a number of bugs.
 New features:
 
 - Support for Go modules. Callers must now import this library as
-  `github.com/robfig/cron/v3`, instead of `gopkg.in/...`
+  `github.com/nanostack-dev/cron`, instead of `gopkg.in/...`
 
 - Fixed bugs:
   - 0f01e6b parser: fix combining of Dow and Dom (#70)
