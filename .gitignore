@@ -20,3 +20,6 @@ _cgo_export.*
 _testmain.go
 
 *.exe
+
+# Agent worktrees, created by git worktree add
+worktrees/
