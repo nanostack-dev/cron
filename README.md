@@ -6,7 +6,7 @@ A maintained fork of [`robfig/cron`](https://github.com/robfig/cron) (MIT) — t
 has had no tagged release since v3.0.1 (2019). This fork keeps the same well-tested cron
 parsing and scheduling semantics while modernizing the codebase:
 
-- Module path `github.com/nanostack-dev/cron`, `go 1.23`.
+- Module path `github.com/nanostack-dev/cron`; the supported Go version is declared in [go.mod](go.mod).
 - `any` over `interface{}`, `io.Discard` over `io/ioutil`, `slices.SortFunc` for entry ordering.
 - The crontab spec itself is unchanged (it is POSIX and decades-stable): standard 5-field
   expressions, optional seconds, descriptors (`@hourly` … `@yearly`), and `@every <duration>`.
@@ -19,7 +19,9 @@ Import it in your program as:
 ```go
 import "github.com/nanostack-dev/cron"
 ```
-It requires Go 1.23 or later.
+It currently requires Go 1.26.5 or later, as declared by `go.mod`.
+
+Standalone development, architecture, tests and release procedures: [docs/README.md](docs/README.md). Agent rules: [AGENTS.md](AGENTS.md); canonical vocabulary: [CONTEXT.md](CONTEXT.md).
 
 The rest of this document describes the API and a list of breaking changes for users that
 upgrade from an earlier version of the upstream library.
