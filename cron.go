@@ -103,7 +103,7 @@ func compareEntryByNext(a, b *Entry) int {
 //
 //	Chain
 //	  Description: Wrap submitted jobs to customize behavior.
-//	  Default:     A chain that recovers panics and logs them to stderr.
+//	  Default:     No job wrappers. Use WithChain(Recover(logger)) for panic recovery.
 //
 // See "cron.With*" to modify the default behavior.
 func New(opts ...Option) *Cron {
