@@ -11,7 +11,7 @@ Import it in your program as:
 
 	import "github.com/nanostack-dev/cron"
 
-It requires Go 1.11 or later due to usage of Go Modules.
+The minimum supported Go version is declared in go.mod.
 
 # Usage
 
@@ -159,9 +159,8 @@ For example:
 	# Runs at 6am in Asia/Tokyo
 	cron.New().AddFunc("CRON_TZ=Asia/Tokyo 0 6 * * ?", ...)
 
-	# Runs at 6am in Asia/Tokyo
+	# Runs at 6am in Asia/Tokyo, overriding the runner's New York time zone
 	c := cron.New(cron.WithLocation(nyc))
-	c.SetLocation("America/New_York")
 	c.AddFunc("CRON_TZ=Asia/Tokyo 0 6 * * ?", ...)
 
 The prefix "TZ=(TIME ZONE)" is also supported for legacy compatibility.
@@ -175,7 +174,7 @@ A Cron runner may be configured with a chain of job wrappers to add
 cross-cutting functionality to all submitted jobs. For example, they may be used
 to achieve the following effects:
 
-  - Recover any panics from jobs (activated by default)
+  - Recover any panics from jobs (requires an explicit Recover wrapper)
   - Delay a job's execution if the previous run hasn't completed yet
   - Skip a job's execution if the previous run hasn't completed yet
   - Log each job's invocations
@@ -183,6 +182,7 @@ to achieve the following effects:
 Install wrappers for all jobs added to a cron using the `cron.WithChain` option:
 
 	cron.New(cron.WithChain(
+		cron.Recover(logger),
 		cron.SkipIfStillRunning(logger),
 	))
 
